@@ -4,7 +4,7 @@ import java.util.List;
 public class PartitionProblem {
     public static void main(String[] args) {
         int[] nums = {3, 8, 4, 6, 1, 2};
-        int n = nums.length;
+        // int n = nums.length;
 
         List<Integer> partition1 = new ArrayList<>();
         List<Integer> partition2 = new ArrayList<>();
