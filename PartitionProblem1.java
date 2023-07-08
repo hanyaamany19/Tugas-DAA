@@ -4,20 +4,20 @@ import java.util.List;
 public class PartitionProblem1 {
     
     /**
-     * This method solves the partition problem by performing an exhaustive search.
-     * Given an array of positive integers, it divides the array into two disjoint subsets
-     * such that the sum of values in each subset is equal.
-     * 
-     * @param nums The array of positive integers
-     * @return A list of two disjoint subsets with equal sum, or null if no solution exists
-     */
+      * Metode ini memecahkan masalah partisi dengan melakukan pencarian lengkap.
+      * Diberikan array bilangan bulat positif, itu membagi array menjadi dua himpunan bagian yang terpisah
+      * sehingga jumlah nilai di setiap subset sama.
+      *
+      * @param nums Array bilangan bulat positif
+      * @return Daftar dua himpunan bagian terpisah dengan jumlah yang sama, atau nol jika tidak ada solusi
+      */
     public static List<List<Integer>> partition(int[] nums) {
         int totalSum = 0;
         for (int num : nums) {
             totalSum += num;
         }
         
-        // Check if the total sum is odd, which means no solution exists
+        // Periksa apakah jumlah totalnya ganjil, yang berarti tidak ada solusi
         if (totalSum % 2 != 0) {
             return null;
         }
@@ -26,39 +26,39 @@ public class PartitionProblem1 {
         List<List<Integer>> subsets = new ArrayList<>();
         List<Integer> currentSubset = new ArrayList<>();
         
-        // Start the exhaustive search
+        // Mulai pencarian lengkap
         generateSubsets(nums, 0, targetSum, currentSubset, subsets);
         
         return subsets;
     }
     
     /**
-     * Recursive helper method to generate subsets and find a solution to the partition problem.
-     * 
-     * @param nums The array of positive integers
-     * @param index The current index in the array
-     * @param targetSum The target sum for each subset
-     * @param currentSubset The current subset being generated
-     * @param subsets The list of subsets with equal sum
-     */
+      * Metode pembantu rekursif untuk menghasilkan himpunan bagian dan menemukan solusi untuk masalah partisi.
+      *
+      * @param nums Array bilangan bulat positif
+      * @param index Indeks saat ini dalam array
+      * @param targetSum Jumlah target untuk setiap subset
+      * @param currentSubset Subset saat ini sedang dibuat
+      * @param himpunan bagian Daftar himpunan bagian dengan jumlah yang sama
+      */
     private static void generateSubsets(int[] nums, int index, int targetSum, List<Integer> currentSubset, List<List<Integer>> subsets) {
-        // Base case: if the target sum is reached, add the current subset to the list of subsets
+        // Kasus dasar: jika jumlah target tercapai, tambahkan subset saat ini ke daftar subset
         if (targetSum == 0) {
             subsets.add(new ArrayList<>(currentSubset));
             return;
         }
         
-        // Base case: if all elements have been processed or the target sum becomes negative, stop the recursion
+        // Kasus dasar: jika semua elemen telah diproses atau jumlah target menjadi negatif, hentikan rekursi
         if (index >= nums.length || targetSum < 0) {
             return;
         }
         
-        // Include the current element in the current subset
+        // Sertakan elemen saat ini di subset saat ini
         currentSubset.add(nums[index]);
         generateSubsets(nums, index + 1, targetSum - nums[index], currentSubset, subsets);
         currentSubset.remove(currentSubset.size() - 1);
         
-        // Exclude the current element from the current subset
+        // Kecualikan elemen saat ini dari subset saat ini
         generateSubsets(nums, index + 1, targetSum, currentSubset, subsets);
     }
     
@@ -67,12 +67,12 @@ public class PartitionProblem1 {
         List<List<Integer>> subsets = partition(nums);
         
         if (subsets != null) {
-            System.out.println("Two disjoint subsets with equal sum:");
+            System.out.println("Dua himpunan bagian terpisah dengan jumlah yang sama:");
             for (List<Integer> subset : subsets) {
                 System.out.println(subset);
             }
         } else {
-            System.out.println("No solution exists.");
+            System.out.println("Tidak ada solusi.");
         }
     }
 }
